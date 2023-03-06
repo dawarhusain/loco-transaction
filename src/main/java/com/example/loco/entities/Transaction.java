@@ -1,14 +1,18 @@
 package com.example.loco.entities;
 
+import static java.lang.Double.valueOf;
+
 public class Transaction {
     private Long transactionId;
     private Double amount;
     private Long parentId;
+    private String transactionType;
 
-    public Transaction(Long transactionId, Double amount, Long parentId) {
+    public Transaction(Long transactionId, Double amount, Long parentId, String transactionType) {
         this.transactionId = transactionId;
         this.amount = amount;
         this.parentId = parentId;
+        this.transactionType = transactionType;
     }
 
     @Override
@@ -17,7 +21,15 @@ public class Transaction {
                 "transactionId=" + transactionId +
                 ", amount=" + amount +
                 ", parentId=" + parentId +
+                ", transactionType='" + transactionType + '\'' +
                 '}';
+    }
+
+    public Transaction() {
+        this.transactionId = null;
+        this.amount = (double) 0;
+        this.parentId = null;
+        this.transactionType = null;
     }
 
     public Long getTransactionId() {
@@ -42,5 +54,13 @@ public class Transaction {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 }

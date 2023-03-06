@@ -3,38 +3,38 @@ package com.example.loco.controller;
 import com.example.loco.entities.Transaction;
 import com.example.loco.service.LocoService;
 import com.example.loco.service.TransactionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class Controller {
 
+    @Autowired
     private TransactionService transactionService;
 
-    public void saveTransaction() {
-
+    @PutMapping("/transactionservice/transaction/{transactionId}")
+    public void saveTransaction(@RequestBody Transaction transaction, @PathVariable Long transactionId) {
+        transaction.setTransactionId(transactionId);
+        this.transactionService.putTransaction(transaction);
     }
 
-    public List<Transaction> getTransactionsByType() {
-
+    @GetMapping("/transactionservice/types/{transactionType}")
+    public ArrayList<Long> getTransactionsByType(@PathVariable String transactionType) {
+        System.out.println(transactionType);
+        return this.transactionService.getTransactionByType(transactionType);
     }
 
-    public Transaction getTransactionById() {
-        return this.transactionService.
+    @GetMapping("/transactionservice/transaction/{transactionId}")
+    public Transaction getTransactionById(@PathVariable Long transactionId) {
+        return this.transactionService.getTransactionById(transactionId);
     }
 
-    /**
-     * @param transactionId
-     * @return sum of all descendant transactions
-     */
     @GetMapping("/transactionservice/sum/{transactionId}")
     public Double getAmountSumById(@PathVariable Long transactionId) {
-        Double sumAmount;
-        return sumAmount;
+        return this.transactionService.getAmountSumById(transactionId);
     }
 
 
