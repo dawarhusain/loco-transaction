@@ -11,7 +11,7 @@ FLUSH PRIVILEGES;
 
 ### Deployments:
 1. download and unzip
-2. cd loco
+2. cd loco-transaction
 3. ./mvnw clean install
 4. ./mvnw spring-boot:run
 
