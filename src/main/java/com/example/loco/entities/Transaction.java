@@ -1,8 +1,20 @@
 package com.example.loco.entities;
 
-import static java.lang.Double.valueOf;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(
+    indexes = {
+        @Index(columnList="parentId")
+    },
+    name = "transaction"
+)
 public class Transaction {
+    @Id
     private Long transactionId;
     private Double amount;
     private Long parentId;

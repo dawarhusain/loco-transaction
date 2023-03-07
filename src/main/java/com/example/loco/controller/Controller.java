@@ -23,7 +23,7 @@ public class Controller {
 
     @GetMapping("/transactionservice/types/{transactionType}")
     public ArrayList<Long> getTransactionsByType(@PathVariable String transactionType) {
-        System.out.println(transactionType);
+//        System.out.println(transactionType);
         return this.transactionService.getTransactionByType(transactionType);
     }
 

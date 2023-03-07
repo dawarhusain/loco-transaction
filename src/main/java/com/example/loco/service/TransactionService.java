@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionService implements LocoService {
@@ -26,18 +28,13 @@ public class TransactionService implements LocoService {
     }
 
     public ArrayList<Long> getTransactionByType(String transactionType) {
-        Transaction transaction = new Transaction();
-        transaction.setTransactionType(transactionType);
-        ArrayList<Long> transactionList=null;
-//        var transactionList = transactionDao.findBy(transaction, (Transaction t) -> {
-//            return transaction.getTransactionType().equals(t.getTransactionType());
-//        });
+        ArrayList<Long> transactionList = new ArrayList<>(transactionDao.findAllByTransactionType(transactionType).stream().map(e -> e.getTransactionId()).collect(Collectors.toList()));
         return transactionList;
     }
 
     public Double getAmountSumById(Long transactionId) {
-        Double amount = (double) 0;
-        return amount;
+        return transactionDao.getSumOfSubtree(transactionId);
     }
+
 
 }
